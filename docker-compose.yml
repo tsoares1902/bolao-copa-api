@@ -1,0 +1,36 @@
+services:
+  database:
+    networks:
+      - bolao-copa
+    container_name: bolao-copa-database
+    image: mongo:latest
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - ./.database:/data/db
+    ports:
+      - ${DATABASE_BIND_PORT}:${DATABASE_PORT}
+    command: ['mongod', '--port', '${DATABASE_PORT}']
+
+  api:
+    depends_on:
+      - database
+    networks:
+      - bolao-copa
+    container_name: bolao-copa-api
+    build:
+      context: .
+    image: api
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - ${APPLICATION_BIND_PORT}:${APPLICATION_PORT}
+
+networks:
+  bolao-copa:
+    driver: bridge
