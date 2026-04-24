@@ -27,7 +27,13 @@ async function bootstrap() {
   SwaggerModule.setup('/docs', app, documentFactory);
 
   app.enableCors();
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
   app.useGlobalFilters(new ApplicationExceptionFilter());
   const configService = app.get<ConfigService>(ConfigService);
   const port = configService.get<number>('api.port', 3000);

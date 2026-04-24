@@ -3,6 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import apiConfig from '@src/shared/infrastructure/config/api.config';
 import { ConfigModule } from '@nestjs/config';
 import { HealthCheckModule } from '@src/modules/health-check/health-check.module';
+import { AuthModule } from '@src/modules/auth/auth.module';
+import { UserModule } from '@src/modules/user/user.module';
 import { TeamModule } from '@src/modules/team/team.module';
 import { StadiumModule } from '@src/modules/stadium/stadium.module';
 import { MatchModule } from '@src/modules/match/match.module';
@@ -10,6 +12,8 @@ import { MatchModule } from '@src/modules/match/match.module';
 const databaseUri = process.env.DATABASE_URI;
 const importedModules = [
   HealthCheckModule,
+  AuthModule,
+  UserModule,
   TeamModule,
   StadiumModule,
   MatchModule,
