@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 
-import type { TeamRepositoryInterface } from '@src/modules/team/application/contracts/repositories/team.repository';
+import type { TeamRepositoryInterface } from '@src/modules/team/application/contracts/repositories/team.repository.interface';
 import type { UpdateTeamUseCaseInterface } from '@src/modules/team/application/contracts/use-cases/update-team.use-case.interface';
 import { TEAM_REPOSITORY_INTERFACE } from '@src/modules/team/application/contracts/tokens/team.tokens';
 import type { UpdateTeamInput } from '@src/modules/team/application/dto/input/update-team.input';

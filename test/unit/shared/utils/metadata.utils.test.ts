@@ -7,7 +7,7 @@ describe('MetadataUtils', () => {
     metadataUtils = new MetadataUtils();
   });
 
-  it('should return pagination data with previous and next links', () => {
+  it('deve retornar os dados de paginacao com links de anterior e proxima', () => {
     expect(metadataUtils.getPaginationData(50, 10, 10, 2, '/users')).toEqual({
       totalItems: 50,
       itemCount: 10,
@@ -25,7 +25,7 @@ describe('MetadataUtils', () => {
     });
   });
 
-  it('should return empty previous and next links on edge pages', () => {
+  it('deve retornar links vazios de anterior e proxima nas paginas de borda', () => {
     expect(metadataUtils.getPaginationData(5, 5, 10, 1, '/users')).toEqual({
       totalItems: 5,
       itemCount: 5,

@@ -4,7 +4,7 @@ import type { Model } from 'mongoose';
 
 import { TeamSchema } from '@src/modules/team/infrastructure/database/mongoose/schemas/team.schema';
 import type { TeamDocument } from '@src/modules/team/infrastructure/database/mongoose/schemas/team.schema';
-import type { TeamRepositoryInterface } from '@src/modules/team/application/contracts/repositories/team.repository';
+import type { TeamRepositoryInterface } from '@src/modules/team/application/contracts/repositories/team.repository.interface';
 import type { TeamEntity } from '@src/modules/team/domain/entities/team.entity';
 import type { CreateTeamInput } from '@src/modules/team/application/dto/input/create-team.input';
 import type { UpdateTeamInput } from '@src/modules/team/application/dto/input/update-team.input';

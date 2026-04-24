@@ -5,7 +5,7 @@ import { ReadTeamUseCase } from '@src/modules/team/application/use-cases/read-te
 import { UpdateTeamUseCase } from '@src/modules/team/application/use-cases/update-team.use-case';
 import { DeleteTeamUseCase } from '@src/modules/team/application/use-cases/delete-team.use-case';
 import { ListTeamUseCase } from '@src/modules/team/application/use-cases/list-team.use-case';
-import type { TeamRepositoryInterface } from '@src/modules/team/application/contracts/repositories/team.repository';
+import { TeamRepositoryInterface } from '@src/modules/team/application/contracts/repositories/team.repository.interface';
 import type { TeamEntity } from '@src/modules/team/domain/entities/team.entity';
 import type { CreateTeamInput } from '@src/modules/team/application/dto/input/create-team.input';
 import type { UpdateTeamInput } from '@src/modules/team/application/dto/input/update-team.input';
@@ -30,7 +30,7 @@ const createTeamEntity = (overrides: Partial<TeamEntity> = {}): TeamEntity => ({
   ...overrides,
 });
 
-describe('Use Cases de Team', () => {
+describe('TeamUseCase', () => {
   let repository: TeamRepositoryMock;
 
   beforeEach(() => {

@@ -4,9 +4,10 @@ import apiConfig from '@src/shared/infrastructure/config/api.config';
 import { ConfigModule } from '@nestjs/config';
 import { HealthCheckModule } from '@src/modules/health-check/health-check.module';
 import { TeamModule } from '@src/modules/team/team.module';
+import { StadiumModule } from '@src/modules/stadium/stadium.module';
 
 const databaseUri = process.env.DATABASE_URI;
-const importedModules = [HealthCheckModule, TeamModule];
+const importedModules = [HealthCheckModule, TeamModule, StadiumModule];
 @Module({
   imports: [
     ConfigModule.forRoot({

@@ -87,8 +87,7 @@
   "jest": {
     "roots": [
       "<rootDir>/src",
-      "<rootDir>/test",
-      "<rootDir>/tests"
+      "<rootDir>/test"
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [

@@ -1,5 +1,6 @@
 import { ApiTags } from '@nestjs/swagger';
 import { Controller, Delete, HttpCode, Inject, Param } from '@nestjs/common';
+
 import { DELETE_TEAM_USE_CASE_INTERFACE } from '@src/modules/team/application/contracts/tokens/team.tokens';
 import type { DeleteTeamUseCaseInterface } from '@src/modules/team/application/contracts/use-cases/delete-team.use-case.interface';
 

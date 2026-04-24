@@ -18,7 +18,7 @@ describe('HealthCheckUseCase', () => {
   });
 
   describe('execute', () => {
-    it('should return the app health using the package version from environment', () => {
+    it('deve retornar a saude da aplicacao usando a versao do package vinda do ambiente', () => {
       process.env.npm_package_version = '1.2.3';
 
       const result = useCase.execute();
@@ -30,7 +30,7 @@ describe('HealthCheckUseCase', () => {
       });
     });
 
-    it('should fallback to the default version when package version is not defined', () => {
+    it('deve retornar a versao padrao quando a versao do package nao estiver definida', () => {
       delete process.env.npm_package_version;
 
       const result = useCase.execute();

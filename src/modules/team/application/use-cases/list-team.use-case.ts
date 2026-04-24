@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import type { TeamRepositoryInterface } from '@src/modules/team/application/contracts/repositories/team.repository';
+import type { TeamRepositoryInterface } from '@src/modules/team/application/contracts/repositories/team.repository.interface';
 import type { ListTeamUseCaseInterface } from '@src/modules/team/application/contracts/use-cases/list-team.use-case.interface';
 import { TEAM_REPOSITORY_INTERFACE } from '@src/modules/team/application/contracts/tokens/team.tokens';
 import type { TeamOutput } from '@src/modules/team/application/dto/output/team.output';

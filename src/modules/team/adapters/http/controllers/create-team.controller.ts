@@ -1,5 +1,6 @@
 import { ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Inject, Post } from '@nestjs/common';
+
 import { CREATE_TEAM_USE_CASE_INTERFACE } from '@src/modules/team/application/contracts/tokens/team.tokens';
 import type { CreateTeamUseCaseInterface } from '@src/modules/team/application/contracts/use-cases/create-team.use-case.interface';
 import type { CreateTeamRequest } from '@src/modules/team/adapters/http/dto/request/create-team.request';
