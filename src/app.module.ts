@@ -5,9 +5,15 @@ import { ConfigModule } from '@nestjs/config';
 import { HealthCheckModule } from '@src/modules/health-check/health-check.module';
 import { TeamModule } from '@src/modules/team/team.module';
 import { StadiumModule } from '@src/modules/stadium/stadium.module';
+import { MatchModule } from '@src/modules/match/match.module';
 
 const databaseUri = process.env.DATABASE_URI;
-const importedModules = [HealthCheckModule, TeamModule, StadiumModule];
+const importedModules = [
+  HealthCheckModule,
+  TeamModule,
+  StadiumModule,
+  MatchModule,
+];
 @Module({
   imports: [
     ConfigModule.forRoot({
