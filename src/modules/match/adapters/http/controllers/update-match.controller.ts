@@ -3,7 +3,7 @@ import { Body, Controller, Inject, Param, Patch } from '@nestjs/common';
 
 import { UPDATE_MATCH_USE_CASE_INTERFACE } from '@src/modules/match/application/contracts/tokens/match.tokens';
 import type { UpdateMatchUseCaseInterface } from '@src/modules/match/application/contracts/use-cases/update-match.use-case.interface';
-import type { UpdateMatchRequest } from '@src/modules/match/adapters/http/dto/request/update-match.request';
+import { UpdateMatchRequest } from '@src/modules/match/adapters/http/dto/request/update-match.request';
 import type { MatchResponse } from '@src/modules/match/adapters/http/dto/response/match.response';
 import { MatchMapper } from '@src/modules/match/adapters/http/mappers/match.mapper';
 

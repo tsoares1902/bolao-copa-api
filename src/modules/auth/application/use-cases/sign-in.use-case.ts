@@ -1,4 +1,9 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
@@ -17,17 +22,15 @@ export class SignInUseCase implements SignInUseCaseInterface {
   constructor(
     @Inject(USER_REPOSITORY_INTERFACE)
     private readonly userRepository: UserRepositoryInterface,
-
     @Inject(AUTH_SESSION_REPOSITORY_INTERFACE)
     private readonly authSessionRepository: AuthSessionRepositoryInterface,
-
     private readonly jwtService: JwtService,
   ) {}
 
   async execute(input: SignInInput): Promise<AuthTokenOutput> {
     const user = await this.userRepository.findByPhone(input.phone);
 
-    if (!user || !user.isActive) {
+    if (!user) {
       throw new BadRequestException('Invalid credentials');
     }
 
@@ -35,6 +38,12 @@ export class SignInUseCase implements SignInUseCaseInterface {
 
     if (!passwordMatches) {
       throw new BadRequestException('Invalid credentials');
+    }
+
+    if (!user.isActive) {
+      throw new ForbiddenException(
+        'Account not activated!. Please activate your account before logging in.',
+      );
     }
 
     const accessToken = await this.jwtService.signAsync({

@@ -3,7 +3,7 @@ import { Body, Controller, Inject, Post } from '@nestjs/common';
 
 import { REFRESH_USE_CASE_INTERFACE } from '@src/modules/auth/application/contracts/tokens/auth.tokens';
 import type { RefreshUseCaseInterface } from '@src/modules/auth/application/contracts/use-cases/refresh.use-case.interface';
-import type { RefreshRequest } from '@src/modules/auth/adapters/http/dto/request/refresh.request';
+import { RefreshRequest } from '@src/modules/auth/adapters/http/dto/request/refresh.request';
 import type { AuthTokenResponse } from '@src/modules/auth/adapters/http/dto/response/auth-token.response';
 import { AuthTokenMapper } from '@src/modules/auth/adapters/http/mappers/auth-token.mapper';
 

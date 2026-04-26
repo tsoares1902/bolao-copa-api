@@ -11,7 +11,7 @@ import type { Request } from 'express';
 
 import { UPDATE_ME_USE_CASE_INTERFACE } from '@src/modules/auth/application/contracts/tokens/auth.tokens';
 import type { UpdateMeUseCaseInterface } from '@src/modules/auth/application/contracts/use-cases/update-me.use-case.interface';
-import type { UpdateMeRequest } from '@src/modules/auth/adapters/http/dto/request/update-me.request';
+import { UpdateMeRequest } from '@src/modules/auth/adapters/http/dto/request/update-me.request';
 import { AccessTokenGuard } from '@src/modules/auth/adapters/http/guards/access-token.guard';
 import type { UserResponse } from '@src/modules/user/adapters/http/dto/response/user.response';
 import { UserMapper } from '@src/modules/user/adapters/http/mappers/user.mapper';

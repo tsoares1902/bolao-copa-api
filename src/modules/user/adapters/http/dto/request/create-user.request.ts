@@ -2,15 +2,23 @@ import { Type } from 'class-transformer';
 import {
   IsDefined,
   IsBoolean,
+  Matches,
   IsNotEmpty,
   IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
+import {
+  BRAZIL_PHONE_REGEX,
+  BRAZIL_PHONE_VALIDATION_MESSAGE,
+} from '@src/shared/utils/phone-validation.utils';
 
 class PhoneRequest {
   @IsString()
   @IsNotEmpty()
+  @Matches(BRAZIL_PHONE_REGEX, {
+    message: BRAZIL_PHONE_VALIDATION_MESSAGE,
+  })
   number!: string;
 
   @IsBoolean()

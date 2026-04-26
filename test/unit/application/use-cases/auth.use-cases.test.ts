@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   NotFoundException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -290,6 +291,29 @@ describe('AuthUseCase', () => {
           password: 'senha-invalida',
         }),
       ).rejects.toThrow(new BadRequestException('Invalid credentials'));
+
+      expect(jwtService.signAsync).not.toHaveBeenCalled();
+      expect(authSessionRepository.create).not.toHaveBeenCalled();
+    });
+
+    it('deve lançar exceção quando a conta não estiver ativada', async () => {
+      userRepository.findByPhone.mockResolvedValue(
+        createUserEntity({
+          isActive: false,
+        }),
+      );
+      (bcrypt.compare as BcryptCompareMock).mockResolvedValue(true as never);
+
+      await expect(
+        useCase.execute({
+          phone: '5511999999999',
+          password: '123456',
+        }),
+      ).rejects.toThrow(
+        new ForbiddenException(
+          'Account not activated!. Please activate your account before logging in.',
+        ),
+      );
 
       expect(jwtService.signAsync).not.toHaveBeenCalled();
       expect(authSessionRepository.create).not.toHaveBeenCalled();
