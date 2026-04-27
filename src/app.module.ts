@@ -9,6 +9,7 @@ import { TeamModule } from '@src/modules/team/team.module';
 import { StadiumModule } from '@src/modules/stadium/stadium.module';
 import { MatchModule } from '@src/modules/match/match.module';
 import { GuessModule } from '@src/modules/guess/guess.module';
+import { RankingModule } from '@src/modules/ranking/ranking.module';
 
 const databaseUri = process.env.DATABASE_URI;
 const importedModules = [
@@ -19,6 +20,7 @@ const importedModules = [
   StadiumModule,
   MatchModule,
   GuessModule,
+  RankingModule,
 ];
 @Module({
   imports: [

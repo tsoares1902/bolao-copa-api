@@ -16,6 +16,8 @@ export interface GuessRepositoryInterface {
   updatePoints(input: {
     guessId: string;
     pointsEarned: number;
+    isCalculated: boolean;
+    calculatedAt: Date;
   }): Promise<GuessEntity | null>;
   delete(guessId: string): Promise<void>;
 }

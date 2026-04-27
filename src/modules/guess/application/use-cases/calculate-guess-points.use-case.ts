@@ -67,6 +67,8 @@ export class CalculateGuessPointsUseCase implements CalculateGuessPointsUseCaseI
         return this.guessRepository.updatePoints({
           guessId: guess._id,
           pointsEarned,
+          isCalculated: true,
+          calculatedAt: new Date(),
         });
       }),
     );

@@ -111,6 +111,8 @@ export class GuessRepository implements GuessRepositoryInterface {
   async updatePoints(input: {
     guessId: string;
     pointsEarned: number;
+    isCalculated: boolean;
+    calculatedAt: Date;
   }): Promise<GuessEntity | null> {
     const guess = await this.guessModel
       .findByIdAndUpdate(
@@ -118,6 +120,8 @@ export class GuessRepository implements GuessRepositoryInterface {
         {
           $set: {
             pointsEarned: input.pointsEarned,
+            isCalculated: input.isCalculated,
+            calculatedAt: input.calculatedAt,
           },
         },
         {
@@ -141,6 +145,8 @@ export class GuessRepository implements GuessRepositoryInterface {
       guessedHomeScore: guess.guessedHomeScore,
       guessedAwayScore: guess.guessedAwayScore,
       pointsEarned: guess.pointsEarned,
+      isCalculated: guess.isCalculated,
+      calculatedAt: guess.calculatedAt,
     };
   }
 }

@@ -56,7 +56,7 @@ export class CreateGuessUseCase implements CreateGuessUseCaseInterface {
     });
 
     if (existingGuess) {
-      throw new ConflictException('Guess already exists for this match');
+      throw new ConflictException('Guess already exists for this match!');
     }
 
     const guess = await this.guessRepository.create(input);

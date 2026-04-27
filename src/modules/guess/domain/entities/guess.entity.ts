@@ -5,6 +5,8 @@ export class GuessEntity {
   guessedHomeScore!: number;
   guessedAwayScore!: number;
   pointsEarned!: number;
+  isCalculated!: boolean;
+  calculatedAt?: Date;
   createdAt?: Date;
   updatedAt?: Date;
 }

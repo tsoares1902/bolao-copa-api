@@ -66,6 +66,7 @@ const createGuessEntity = (
   guessedHomeScore: 2,
   guessedAwayScore: 1,
   pointsEarned: 0,
+  isCalculated: false,
   createdAt: new Date('2026-06-01T00:00:00.000Z'),
   updatedAt: new Date('2026-06-01T00:00:00.000Z'),
   ...overrides,
@@ -151,7 +152,16 @@ describe('GuessUseCase', () => {
         matchId: 'match-id',
       });
       expect(guessRepository.create).toHaveBeenCalledWith(input);
-      expect(result).toEqual(guess);
+      expect(result).toEqual({
+        _id: 'guess-id',
+        userId: 'user-id',
+        matchId: 'match-id',
+        guessedHomeScore: 2,
+        guessedAwayScore: 1,
+        pointsEarned: 0,
+        createdAt: new Date('2026-06-01T00:00:00.000Z'),
+        updatedAt: new Date('2026-06-01T00:00:00.000Z'),
+      });
     });
 
     it('deve lançar exceção quando algum placar for negativo', async () => {
@@ -231,7 +241,7 @@ describe('GuessUseCase', () => {
           guessedAwayScore: 0,
         }),
       ).rejects.toThrow(
-        new ConflictException('Guess already exists for this match'),
+        new ConflictException('Guess already exists for this match!'),
       );
 
       expect(guessRepository.create).not.toHaveBeenCalled();
@@ -252,7 +262,16 @@ describe('GuessUseCase', () => {
       const result = await useCase.execute({ guessId: 'guess-id' });
 
       expect(guessRepository.read).toHaveBeenCalledWith('guess-id');
-      expect(result).toEqual(guess);
+      expect(result).toEqual({
+        _id: 'guess-id',
+        userId: 'user-id',
+        matchId: 'match-id',
+        guessedHomeScore: 2,
+        guessedAwayScore: 1,
+        pointsEarned: 0,
+        createdAt: new Date('2026-06-01T00:00:00.000Z'),
+        updatedAt: new Date('2026-06-01T00:00:00.000Z'),
+      });
     });
 
     it('deve lançar exceção quando o palpite não for encontrado', async () => {
@@ -293,7 +312,16 @@ describe('GuessUseCase', () => {
       expect(guessRepository.read).toHaveBeenCalledWith('guess-id');
       expect(matchRepository.read).toHaveBeenCalledWith('match-id');
       expect(guessRepository.update).toHaveBeenCalledWith(input);
-      expect(result).toEqual(updatedGuess);
+      expect(result).toEqual({
+        _id: 'guess-id',
+        userId: 'user-id',
+        matchId: 'match-id',
+        guessedHomeScore: 3,
+        guessedAwayScore: 1,
+        pointsEarned: 0,
+        createdAt: new Date('2026-06-01T00:00:00.000Z'),
+        updatedAt: new Date('2026-06-01T00:00:00.000Z'),
+      });
     });
 
     it('deve lançar exceção quando o placar da casa for negativo', async () => {
@@ -478,7 +506,28 @@ describe('GuessUseCase', () => {
       const result = await useCase.execute();
 
       expect(guessRepository.list).toHaveBeenCalledTimes(1);
-      expect(result).toEqual(guesses);
+      expect(result).toEqual([
+        {
+          _id: 'guess-id',
+          userId: 'user-id',
+          matchId: 'match-id',
+          guessedHomeScore: 2,
+          guessedAwayScore: 1,
+          pointsEarned: 0,
+          createdAt: new Date('2026-06-01T00:00:00.000Z'),
+          updatedAt: new Date('2026-06-01T00:00:00.000Z'),
+        },
+        {
+          _id: 'guess-id-2',
+          userId: 'user-id-2',
+          matchId: 'match-id-2',
+          guessedHomeScore: 2,
+          guessedAwayScore: 1,
+          pointsEarned: 0,
+          createdAt: new Date('2026-06-01T00:00:00.000Z'),
+          updatedAt: new Date('2026-06-01T00:00:00.000Z'),
+        },
+      ]);
     });
   });
 
@@ -496,7 +545,18 @@ describe('GuessUseCase', () => {
       const result = await useCase.execute({ userId: 'user-id' });
 
       expect(guessRepository.listByUser).toHaveBeenCalledWith('user-id');
-      expect(result).toEqual(guesses);
+      expect(result).toEqual([
+        {
+          _id: 'guess-id',
+          userId: 'user-id',
+          matchId: 'match-id',
+          guessedHomeScore: 2,
+          guessedAwayScore: 1,
+          pointsEarned: 0,
+          createdAt: new Date('2026-06-01T00:00:00.000Z'),
+          updatedAt: new Date('2026-06-01T00:00:00.000Z'),
+        },
+      ]);
     });
   });
 
@@ -516,7 +576,18 @@ describe('GuessUseCase', () => {
 
       expect(matchRepository.read).toHaveBeenCalledWith('match-id');
       expect(guessRepository.listByMatch).toHaveBeenCalledWith('match-id');
-      expect(result).toEqual(guesses);
+      expect(result).toEqual([
+        {
+          _id: 'guess-id',
+          userId: 'user-id',
+          matchId: 'match-id',
+          guessedHomeScore: 2,
+          guessedAwayScore: 1,
+          pointsEarned: 0,
+          createdAt: new Date('2026-06-01T00:00:00.000Z'),
+          updatedAt: new Date('2026-06-01T00:00:00.000Z'),
+        },
+      ]);
     });
 
     it('deve lançar exceção quando a partida não for encontrada', async () => {
@@ -593,18 +664,33 @@ describe('GuessUseCase', () => {
 
       const result = await useCase.execute({ matchId: 'match-id' });
 
-      expect(guessRepository.updatePoints).toHaveBeenNthCalledWith(1, {
-        guessId: 'guess-1',
-        pointsEarned: 10,
-      });
-      expect(guessRepository.updatePoints).toHaveBeenNthCalledWith(2, {
-        guessId: 'guess-2',
-        pointsEarned: 5,
-      });
-      expect(guessRepository.updatePoints).toHaveBeenNthCalledWith(3, {
-        guessId: 'guess-3',
-        pointsEarned: 0,
-      });
+      expect(guessRepository.updatePoints).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({
+          guessId: 'guess-1',
+          pointsEarned: 10,
+          isCalculated: true,
+          calculatedAt: expect.any(Date),
+        }),
+      );
+      expect(guessRepository.updatePoints).toHaveBeenNthCalledWith(
+        2,
+        expect.objectContaining({
+          guessId: 'guess-2',
+          pointsEarned: 5,
+          isCalculated: true,
+          calculatedAt: expect.any(Date),
+        }),
+      );
+      expect(guessRepository.updatePoints).toHaveBeenNthCalledWith(
+        3,
+        expect.objectContaining({
+          guessId: 'guess-3',
+          pointsEarned: 0,
+          isCalculated: true,
+          calculatedAt: expect.any(Date),
+        }),
+      );
       expect(result).toHaveLength(3);
     });
 

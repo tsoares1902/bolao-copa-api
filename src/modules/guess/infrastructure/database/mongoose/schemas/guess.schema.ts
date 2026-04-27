@@ -40,6 +40,17 @@ export class GuessSchema {
     min: 0,
   })
   pointsEarned!: number;
+
+  @Prop({
+    required: true,
+    default: false,
+  })
+  isCalculated!: boolean;
+
+  @Prop({
+    required: false,
+  })
+  calculatedAt?: Date;
 }
 
 export const GuessSchemaFactory = SchemaFactory.createForClass(GuessSchema);
